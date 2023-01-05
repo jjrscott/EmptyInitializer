@@ -77,22 +77,22 @@ struct EmptyKeyedDecodingContainer<Key: CodingKey>: KeyedDecodingContainerProtoc
     }
     
     func decode<T>(_ type: T.Type, forKey key: Key) throws -> T where T : Decodable {
-        try EmptyInitializer.initialize(type: type)
+        try T(from: EmptyDecoder())
     }
     
     func nestedContainer<NestedKey>(keyedBy type: NestedKey.Type, forKey key: Key) throws -> KeyedDecodingContainer<NestedKey> where NestedKey : CodingKey {
-        fatalError()
+        KeyedDecodingContainer(EmptyKeyedDecodingContainer<NestedKey>())
     }
     
     func nestedUnkeyedContainer(forKey key: Key) throws -> UnkeyedDecodingContainer {
-        fatalError()
+        EmptyUnkeyedDecodingContainer()
     }
     
     func superDecoder() throws -> Decoder {
-        fatalError()
+        EmptyDecoder()
     }
     
     func superDecoder(forKey key: Key) throws -> Decoder {
-        fatalError()
+        EmptyDecoder()
     }
 }

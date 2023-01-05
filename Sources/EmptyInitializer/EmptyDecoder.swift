@@ -7,15 +7,10 @@
 
 import Foundation
 
-class EmptyDecoder: Decoder {
-    var codingPath: [CodingKey]
+struct EmptyDecoder: Decoder {
+    var codingPath: [CodingKey] = []
     
-    var userInfo: [CodingUserInfoKey : Any]
-
-    init(codingPath: [CodingKey], userInfo: [CodingUserInfoKey : Any]) {
-        self.codingPath = codingPath
-        self.userInfo = userInfo
-    }
+    var userInfo: [CodingUserInfoKey : Any] = [:]
         
     func container<Key>(keyedBy type: Key.Type) throws -> KeyedDecodingContainer<Key> where Key : CodingKey {
         KeyedDecodingContainer(EmptyKeyedDecodingContainer<Key>())

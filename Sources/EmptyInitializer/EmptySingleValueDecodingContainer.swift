@@ -72,6 +72,6 @@ struct EmptySingleValueDecodingContainer: SingleValueDecodingContainer {
     }
     
     func decode<T>(_ type: T.Type) throws -> T where T : Decodable {
-        try EmptyInitializer.initialize(type: type)
+        try T(from: EmptyDecoder())
     }
 }
